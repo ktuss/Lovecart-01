@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fuente romántica -->
+<!-- Fuente estilo romántica -->
 <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 
-<title>Tarjeta Interactiva</title>
+<title>Love & Trust</title>
 
 <style>
 body {
@@ -15,6 +15,7 @@ body {
   overflow: hidden;
   font-family: 'Parisienne', cursive;
   color: white;
+  text-align: center;
 }
 
 /* ESCENAS */
@@ -25,78 +26,130 @@ body {
   display: none;
   justify-content: center;
   align-items: center;
-  text-align: center;
   flex-direction: column;
-  background-size: cover;
-  background-position: center;
-  transition: opacity 1s ease-in-out;
 }
 
-/* TOKIO */
+/* ESCENA 1 - MUNDO */
 #scene1 {
-  background-image: url('https://images.unsplash.com/photo-1526481280691-7b8b94d7b1bb');
+  background: black;
 }
 
-/* TORRE EIFFEL */
+.earth {
+  width: 150px;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ESCENA 2 - TORRE */
 #scene2 {
-  background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34');
+  background: #020024;
 }
 
-/* FINAL */
+.eiffel {
+  width: 120px;
+  filter: drop-shadow(0 0 10px gold);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 5px gold); }
+  to { filter: drop-shadow(0 0 20px gold); }
+}
+
+/* ESTRELLAS */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(100vh); }
+}
+
+/* ESCENA 3 - CORAZÓN */
 #scene3 {
   background: black;
 }
 
-/* TEXTO */
-.text {
-  font-size: 34px;
-  padding: 20px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  text-shadow: 0 0 10px rgba(255,255,255,0.8);
-}
-
-/* EFECTO HOJA */
-.fade {
-  animation: fadeIn 2s ease;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-/* CORAZÓN */
 .heart {
-  width: 100px;
-  height: 100px;
-  background: #ff004c;
+  width: 120px;
+  height: 120px;
+  background: red;
   transform: rotate(45deg);
-  animation: beat 1s infinite, glow 1.5s infinite alternate;
-  margin-bottom: 20px;
+  animation: beat 1s infinite;
+  position: relative;
 }
 
 .heart:before,
 .heart:after {
   content: "";
-  width: 100px;
-  height: 100px;
-  background: #ff004c;
+  width: 120px;
+  height: 120px;
+  background: red;
   border-radius: 50%;
   position: absolute;
 }
 
-.heart:before { top: -50px; }
-.heart:after { left: -50px; }
+.heart:before { top: -60px; }
+.heart:after { left: -60px; }
 
 @keyframes beat {
   0%,100% { transform: scale(1) rotate(45deg); }
   50% { transform: scale(1.2) rotate(45deg); }
 }
 
-@keyframes glow {
-  from { box-shadow: 0 0 10px #ff004c; }
-  to { box-shadow: 0 0 30px #ff004c; }
+/* OJOS */
+.eye {
+  width: 15px;
+  height: 15px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+  display: none;
+}
+
+.eye.left { left: 25px; }
+.eye.right { right: 25px; }
+
+/* BOCA */
+.mouth {
+  width: 30px;
+  height: 15px;
+  background: black;
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 45px;
+  display: none;
+}
+
+/* TEXTO */
+.text {
+  font-size: 30px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* EFECTO ESCRITURA */
+.typing {
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 4s steps(40, end) forwards;
+}
+
+@keyframes typing {
+  to { width: 100%; }
 }
 </style>
 </head>
@@ -104,44 +157,70 @@ body {
 <body>
 
 <!-- ESCENA 1 -->
-<div id="scene1" class="scene fade">
-  <div class="text">
-    No hay ciudad en este mundo<br>
-    que ilumine más que tu…
+<div id="scene1" class="scene">
+  <img class="earth" src="https://cdn-icons-png.flaticon.com/512/1598/1598431.png">
+  <div class="text typing">
+    No hay ciudad en este mundo que ilumine más que tu…
   </div>
 </div>
 
 <!-- ESCENA 2 -->
-<div id="scene2" class="scene fade">
+<div id="scene2" class="scene">
+  <img class="eiffel" src="https://cdn-icons-png.flaticon.com/512/684/684908.png">
   <div class="text">
-    Ni las luces que compitan<br>
-    con esos ojos…
+    Ni las luces que compitan con esos ojos…
   </div>
 </div>
 
 <!-- ESCENA 3 -->
-<div id="scene3" class="scene fade">
-  <div class="heart"></div>
-  <div class="text">
-    Porque me llevan directo<br>
-    a donde quiero estar ❤️
+<div id="scene3" class="scene">
+  <div class="heart" id="heart">
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+    <div class="mouth"></div>
   </div>
+  <div class="text" id="finalText"></div>
 </div>
 
 <script>
 let scenes = document.querySelectorAll('.scene');
-let current = 0;
 
-function showScene(index) {
-  scenes.forEach(scene => scene.style.display = "none");
-  scenes[index].style.display = "flex";
+function showScene(i){
+  scenes.forEach(s => s.style.display = "none");
+  scenes[i].style.display = "flex";
 }
 
+/* ESCENAS */
 showScene(0);
 
-// Cambios automáticos
-setTimeout(() => { showScene(1); }, 4000);
-setTimeout(() => { showScene(2); }, 8000);
+setTimeout(() => { showScene(1); createStars(); }, 5000);
+setTimeout(() => { showScene(2); }, 10000);
+
+/* ESTRELLAS */
+function createStars(){
+  for(let i=0;i<30;i++){
+    let star = document.createElement("div");
+    star.classList.add("star");
+    star.style.left = Math.random()*100+"%";
+    star.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(star);
+  }
+}
+
+/* ANIMACIÓN FINAL */
+setTimeout(() => {
+  let eyes = document.querySelectorAll('.eye');
+  let mouth = document.querySelector('.mouth');
+
+  eyes.forEach(e => e.style.display = "block");
+
+  setTimeout(() => {
+    mouth.style.display = "block";
+    document.getElementById("finalText").innerHTML =
+      "Porque me llevan directo a donde quiero estar ❤️";
+  }, 2000);
+
+}, 12000);
 </script>
 
 </body>
