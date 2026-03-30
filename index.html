@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Fuente romántica -->
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+
+<title>Tarjeta Interactiva</title>
+
+<style>
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Parisienne', cursive;
+  color: white;
+}
+
+/* ESCENAS */
+.scene {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+}
+
+/* TOKIO */
+#scene1 {
+  background-image: url('https://images.unsplash.com/photo-1526481280691-7b8b94d7b1bb');
+}
+
+/* TORRE EIFFEL */
+#scene2 {
+  background-image: url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34');
+}
+
+/* FINAL */
+#scene3 {
+  background: black;
+}
+
+/* TEXTO */
+.text {
+  font-size: 34px;
+  padding: 20px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* EFECTO HOJA */
+.fade {
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* CORAZÓN */
+.heart {
+  width: 100px;
+  height: 100px;
+  background: #ff004c;
+  transform: rotate(45deg);
+  animation: beat 1s infinite, glow 1.5s infinite alternate;
+  margin-bottom: 20px;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background: #ff004c;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart:before { top: -50px; }
+.heart:after { left: -50px; }
+
+@keyframes beat {
+  0%,100% { transform: scale(1) rotate(45deg); }
+  50% { transform: scale(1.2) rotate(45deg); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px #ff004c; }
+  to { box-shadow: 0 0 30px #ff004c; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ESCENA 1 -->
+<div id="scene1" class="scene fade">
+  <div class="text">
+    No hay ciudad en este mundo<br>
+    que ilumine más que tu…
+  </div>
+</div>
+
+<!-- ESCENA 2 -->
+<div id="scene2" class="scene fade">
+  <div class="text">
+    Ni las luces que compitan<br>
+    con esos ojos…
+  </div>
+</div>
+
+<!-- ESCENA 3 -->
+<div id="scene3" class="scene fade">
+  <div class="heart"></div>
+  <div class="text">
+    Porque me llevan directo<br>
+    a donde quiero estar ❤️
+  </div>
+</div>
+
+<script>
+let scenes = document.querySelectorAll('.scene');
+let current = 0;
+
+function showScene(index) {
+  scenes.forEach(scene => scene.style.display = "none");
+  scenes[index].style.display = "flex";
+}
+
+showScene(0);
+
+// Cambios automáticos
+setTimeout(() => { showScene(1); }, 4000);
+setTimeout(() => { showScene(2); }, 8000);
+</script>
+
+</body>
+</html>
